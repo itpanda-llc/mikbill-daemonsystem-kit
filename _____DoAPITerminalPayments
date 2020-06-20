@@ -1,0 +1,1 @@
+* * * * * root cd /var/www/mikbill/admin/ > /dev/null 2>&1 && /usr/bin/php ./index.php do_api_terminal_payments > /dev/null 2>&1
