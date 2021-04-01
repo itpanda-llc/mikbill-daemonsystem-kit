@@ -1,0 +1,139 @@
+
+# Файл из репозитория MikBill-DaemonSystem-PHP-Kit
+# https://github.com/mikbill-daemonsystem-php-kit
+
+#Komtet Receipt Update
+#* * * * * root sleep 10 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./KomtetReceiptUpdate.php "1" > /dev/null 2>&1
+#* * * * * root sleep 40 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./KomtetReceiptUpdate.php "1" > /dev/null 2>&1
+
+#Sberbank Order API Payment/Reset
+#*/10 * * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./SberbankOrderAPIPayment.php "3" > /dev/null 2>&1
+#*/10 * * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./SberbankOrderReset.php "3" > /dev/null 2>&1
+
+#Chelinvest Order API Payment/Reset
+#*/10 * * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./ChelinvestOrderAPIPayment.php "3" > /dev/null 2>&1
+#*/10 * * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./ChelinvestOrderReset.php "3" > /dev/null 2>&1
+
+#AirMax Device/Server Update
+*/10 * * * * root sleep 20 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./AirMaxDeviceUpdate.php > /dev/null 2>&1
+*/10 * * * * root sleep 20 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./AirMaxServerUpdate.php > /dev/null 2>&1
+
+#New/Old Ticket Admin SMSPilot Notice
+0 8 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./NewTicketAdminSMSPilotNotice.php "840" > /dev/null 2>&1
+0 9-18 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./NewTicketAdminSMSPilotNotice.php "60" > /dev/null 2>&1
+0 8 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./OldTicketAdminSMSPilotNotice.php "30" > /dev/null 2>&1
+
+#Ticket Message Admin SMSPilot Notice
+0 8 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./TicketMessageAdminSMSPilotNotice.php "840" > /dev/null 2>&1
+0 9-18 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./TicketMessageAdminSMSPilotNotice.php "60" > /dev/null 2>&1
+
+#Open/Performed Ticket Set In Work/Closed Status Type
+*/30 8 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./OpenTicketSetInWorkStatusType.php "3" > /dev/null 2>&1
+*/30 9-17 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./OpenTicketSetInWorkStatusType.php "3" > /dev/null 2>&1
+59 23 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./PerformedTicketSetClosedStatusType.php "3" > /dev/null 2>&1
+
+#Offline Admin SMSPilot Notice
+*/10 8-23 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./OfflineAdminSMSPilotNotice.php "10" > /dev/null 2>&1
+
+#Auth Staff SMSPilot Notice
+* * * * * root sleep 15 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./AuthStaffSMSPilotNotice.php "15" > /dev/null 2>&1
+* * * * * root sleep 30 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./AuthStaffSMSPilotNotice.php "15" > /dev/null 2>&1
+* * * * * root sleep 45 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./AuthStaffSMSPilotNotice.php "15" > /dev/null 2>&1
+* * * * * root sleep 60 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./AuthStaffSMSPilotNotice.php "15" > /dev/null 2>&1
+
+#Birth Day Staff Compliment
+0 11 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./BirthDayStaffSMSPilotCompliment.php > /dev/null 2>&1
+
+#Active/Turbo Start/Stop RouterOS Session Remove
+30 6 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./ActiveRouterOSSessionRemove.php > /dev/null 2>&1
+* * * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./TurboStartRouterOSSessionRemove.php "1" > /dev/null 2>&1
+*/7 * * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./TurboStopRouterOSSessionRemove.php "7" > /dev/null 2>&1
+
+#Active RouterOS Queue Remove
+30-50/10 23 * * 1,2,3,4,7 root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./ActiveRouterOSQueueRemove.php > /dev/null 2>&1
+*/10 0-5 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./ActiveRouterOSQueueRemove.php > /dev/null 2>&1
+0-20/10 6 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./ActiveRouterOSQueueRemove.php > /dev/null 2>&1
+
+#CKassa RouterOS Firewall Set
+0 */12 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./CKassaRouterOSFirewallSet.php > /dev/null 2>&1
+
+#Error Message SMSPilot Resend
+*/30 11-18 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./ErrorMessageSMSPilotResend.php "16" > /dev/null 2>&1
+0 19 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./ErrorMessageSMSPilotResend.php "8" > /dev/null 2>&1
+
+#Birth Day Bonus Log
+34 10 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./BirthDayBonusLog.php > /dev/null 2>&1
+
+#Database/Files FTP Backup
+10 5 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./DatabaseFTPBackup.php > /dev/null 2>&1
+11 5 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./FilesFTPBackup.php > /dev/null 2>&1
+
+#Komtet Receipt SMSPilot Notice
+#* * * * * root sleep 20 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./KomtetReceiptSMSPilotNotice.php "30" > /dev/null 2>&1
+#* * * * * root sleep 50 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./KomtetReceiptSMSPilotNotice.php "30" > /dev/null 2>&1
+
+#Komtet Receipt SMSCenter Notice
+* * * * * root sleep 20 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./KomtetReceiptSMSCenterNotice.php "30" > /dev/null 2>&1
+* * * * * root sleep 50 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./KomtetReceiptSMSCenterNotice.php "30" > /dev/null 2>&1
+
+#Turbo SMSPilot Notice
+#* * * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./TurboSMSPilotNotice.php "1" > /dev/null 2>&1
+
+#Turbo SMSCenter Notice
+* * * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./TurboSMSCenterNotice.php "1" > /dev/null 2>&1
+
+#Discount Remove SMSPilot Notice
+30 10 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./DiscountRemoveSMSPilotNotice.php "691" > /dev/null 2>&1
+31-59 10 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./DiscountRemoveSMSPilotNotice.php "1" > /dev/null 2>&1
+* 11-22 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./DiscountRemoveSMSPilotNotice.php "1" > /dev/null 2>&1
+0 23 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./DiscountRemoveSMSPilotNotice.php "1" > /dev/null 2>&1
+
+#Discount Remove SMSCenter Notice
+#30 10 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./DiscountRemoveSMSCenterNotice.php "691" > /dev/null 2>&1
+#31-59 10 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./DiscountRemoveSMSCenterNotice.php "1" > /dev/null 2>&1
+#* 11-22 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./DiscountRemoveSMSCenterNotice.php "1" > /dev/null 2>&1
+#0 23 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./DiscountRemoveSMSCenterNotice.php "1" > /dev/null 2>&1
+
+#Payment/Stop/Credit/Block Sberbank SMSPilot Remind
+#35 10 * * * root sleep 10 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./PaymentSberbankSMSPilotRemind.php "2" > /dev/null 2>&1
+#35 10 * * * root sleep 20 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./StopSberbankSMSPilotRemind.php "1" > /dev/null 2>&1
+#35 10 * * * root sleep 30 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./CreditSberbankSMSPilotRemind.php "1" > /dev/null 2>&1
+#35 10 * * * root sleep 40 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./BlockSberbankSMSPilotRemind.php "5" > /dev/null 2>&1
+
+#Payment/Stop/Credit/Block Chelinvest SMSPilot Remind
+#35 10 * * * root sleep 10 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./PaymentChelinvestSMSPilotRemind.php "2" > /dev/null 2>&1
+#35 10 * * * root sleep 20 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./StopChelinvestSMSPilotRemind.php "1" > /dev/null 2>&1
+#35 10 * * * root sleep 30 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./CreditChelinvestSMSPilotRemind.php "1" > /dev/null 2>&1
+#35 10 * * * root sleep 40 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./BlockChelinvestSMSPilotRemind.php "5" > /dev/null 2>&1
+
+#Payment/Stop/Credit/Block CKassa SMSPilot Remind
+#35 10 * * * root sleep 10 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./PaymentCKassaSMSPilotRemind.php "2" > /dev/null 2>&1
+#35 10 * * * root sleep 20 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./StopCKassaSMSPilotRemind.php "1" > /dev/null 2>&1
+35 10 * * * root sleep 30 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./CreditCKassaSMSPilotRemind.php "1" > /dev/null 2>&1
+35 10 * * * root sleep 40 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./BlockCKassaSMSPilotRemind.php "5" > /dev/null 2>&1
+
+#Payment/Stop/Credit/Block Sberbank SMSCenter Remind
+#35 10 * * * root sleep 10 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./PaymentSberbankSMSCenterRemind.php "2" > /dev/null 2>&1
+#35 10 * * * root sleep 20 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./StopSberbankSMSCenterRemind.php "1" > /dev/null 2>&1
+#35 10 * * * root sleep 30 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./CreditSberbankSMSCenterRemind.php "1" > /dev/null 2>&1
+#35 10 * * * root sleep 40 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./BlockSberbankSMSCenterRemind.php "5" > /dev/null 2>&1
+
+#Payment/Stop/Credit/Block Chelinvest SMSCenter Remind
+#35 10 * * * root sleep 10 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./PaymentChelinvestSMSCenterRemind.php "2" > /dev/null 2>&1
+#35 10 * * * root sleep 20 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./StopChelinvestSMSCenterRemind.php "1" > /dev/null 2>&1
+#35 10 * * * root sleep 30 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./CreditChelinvestSMSCenterRemind.php "1" > /dev/null 2>&1
+#35 10 * * * root sleep 40 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./BlockChelinvestSMSCenterRemind.php "5" > /dev/null 2>&1
+
+#Payment/Stop/Credit/Block CKassa SMSCenter Remind
+35 10 * * * root sleep 10 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./PaymentCKassaSMSCenterRemind.php "2" > /dev/null 2>&1
+35 10 * * * root sleep 20 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./StopCKassaSMSCenterRemind.php "1" > /dev/null 2>&1
+#35 10 * * * root sleep 30 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./CreditCKassaSMSCenterRemind.php "1" > /dev/null 2>&1
+#35 10 * * * root sleep 40 && cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./BlockCKassaSMSCenterRemind.php "5" > /dev/null 2>&1
+
+#Birth Day/New Year/March 8 SMSPilot Compliment
+34 10 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./BirthDaySMSPilotCompliment.php > /dev/null 2>&1
+15 11 31 12 * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./NewYearSMSPilotCompliment.php > /dev/null 2>&1
+15 11 8 3 * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./March8SMSPilotCompliment.php > /dev/null 2>&1
+
+#Payment Date Change
+10 0 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./PaymentDateChange.php "1" > /dev/null 2>&1

@@ -1,44 +1,55 @@
 # MikBill-DaemonSystem-PHP-Kit
 
-Набор PHP-скриптов в дополнение функционалу биллинговой системы [АСР "MikBill"](https://mikbill.pro), периодически запускаемых в операционной системе
+Набор периодических скриптов для биллинговой системы ["MikBill"](https://mikbill.pro)
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/itpanda-llc/mikbill-daemonsystem-kit)](https://packagist.org/packages/itpanda-llc/mikbill-daemonsystem-kit/stats)
+![Packagist License](https://img.shields.io/packagist/l/itpanda-llc/mikbill-daemonsystem-kit)
+![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/itpanda-llc/mikbill-daemonsystem-kit)
 
 ## Ссылки
 
 * [Разработка](https://github.com/itpanda-llc)
-* [О проекте (АСР "MikBill")](https://mikbill.pro)
-* [Документация (АСР "MikBill")](https://wiki.mikbill.pro)
-* [Сообщество (АСР "MikBill")](https://mikbill.userecho.com)
+* [О проекте (MikBill)](https://mikbill.pro)
+* [Документация (MikBill)](https://wiki.mikbill.pro)
+
+## Возможности
+
+см. [файлы](scripts)
 
 ## Требования
 
-* CentOS >= 7
 * PHP >= 7.2
-* PDO
-* ssh2
+* cURL
 * FTP
-* [smspilot-messenger-php-sdk](https://github.com/itpanda-llc/smspilot-messenger-php-sdk)
-* [smsc-sender-php-sdk](https://github.com/itpanda-llc/smsc-sender-php-sdk)
-* [chelinvest-acquirer-php-sdk](https://github.com/itpanda-llc/chelinvest-acquirer-php-sdk)
-* [komtet-kassa-php-sdk](https://github.com/Komtet/komtet-kassa-php-sdk)
+* JSON
+* libxml
+* PDO
+* SimpleXML
+* [EvilFreelancer/routeros-api-php](https://github.com/EvilFreelancer/routeros-api-php)
+* [Komtet/komtet-kassa-php-sdk](https://github.com/Komtet/komtet-kassa-php-sdk)
+* [markus-perl/gender-api-client](https://github.com/markus-perl/gender-api-client)
+* [itpanda-llc/chelinvest-acquirer-php-sdk](https://github.com/itpanda-llc/chelinvest-acquirer-php-sdk)
+* [itpanda-llc/mikbill-deviceview-php-api](https://github.com/itpanda-llc/mikbill-deviceview-php-api)
+* [itpanda-llc/sberbank-acquirer-php-sdk](https://github.com/itpanda-llc/sberbank-acquirer-php-sdk)
+* [itpanda-llc/smscenter-messenger-php-sdk](https://github.com/itpanda-llc/smscenter-messenger-php-sdk)
+* [itpanda-llc/smspilot-messenger-php-sdk](https://github.com/itpanda-llc/smspilot-messenger-php-sdk)
 
+## Установка
 
-* !! Для продолжения функционала репозитория и расширения возможностей, при пользовании системой [АСР "MikBill"](https://mikbill.pro), дополнительно, рекомендовано применять набор [mikbill-eventsystem-php-kit](https://github.com/itpanda-llc/mikbill-eventsystem-php-kit), осуществляющий другие (остальные) полезные действия, используя "Систему событий" биллинга.
+```shell script
+composer require itpanda-llc/mikbill-daemonsystem-kit
+```
 
-## Рекомендуемая установка и подготовка
+## Конфигурация
 
-Создание и переход в директорию, например "mkdir /var/mikbill/__ext/ && cd /var/mikbill/__ext/".
+Указание
 
-Клонирование необходимых репозиториев:
+* Путей к [конфигурационному файлу](https://wiki.mikbill.pro/billing/config_file), интерфейсам и значений констант в [файлах-скриптах](scripts)
+* В файлах "cron" заданий с запуском [скриптов](scripts) (см. далее)
 
-* git clone https://github.com/itpanda-llc/mikbill-daemonsystem-php-kit 
-* git clone https://github.com/itpanda-llc/mikbill-eventsystem-php-kit
-* git clone https://github.com/itpanda-llc/smspilot-messenger-php-sdk
-* git clone https://github.com/itpanda-llc/smsc-sender-php-sdk
-* git clone https://github.com/itpanda-llc/chelinvest-acquirer-php-sdk
-* git clone https://github.com/Komtet/komtet-kassa-php-sdk
+/etc/crontab или [/etc/cron.d/*](examples/cron.d/__daemonsystem)
 
-Конфигурация скриптов по пути "/var/mikbill/__ext/mikbill-daemonsystem-php-kit/scripts/" - корректирование путей, констант и значений.
-
-##### ..Для запуска скриптов необходимо использовать планировщик (cron). Каждый файл самостоятелен и независим от соседних. Для понимания логики действия и условий срабатывания программ в подробностях, необходимо изучение SQL-запросов в скриптах..
+```text
+34 10 * * * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./BirthDaySMSPilotCompliment.php > /dev/null 2>&1
+15 11 31 12 * root cd /var/mikbill/__ext/vendor/itpanda-llc/mikbill-daemonsystem-kit/scripts/ && /usr/bin/php ./NewYearSMSPilotCompliment.php > /dev/null 2>&1
+```
