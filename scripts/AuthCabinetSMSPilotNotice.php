@@ -26,13 +26,10 @@ const SMS_PILOT_NAME = '***';
 const CONFIG = '/var/www/mikbill/admin/app/etc/config.xml';
 
 /** Текст сообщения */
-const MESSAGE = 'Услуга Турбо подключена.';
+const MESSAGE = 'Выполнен вход в личный кабинет.';
 
 /** Подпись, добавляемая к сообщению */
 const COMPLIMENT = '***';
-
-/** Текст ошибки */
-const ERROR_TEXT = 'Не отправлено';
 
 require_once 'lib/func/getConfig.php';
 require_once 'lib/func/getConnect.php';
@@ -42,7 +39,7 @@ require_once '../../../autoload.php';
 use Panda\SmsPilot\MessengerSdk;
 
 /**
- * @return array Параметры клиентов
+ * @return array|null Номера телефонов
  */
 function getClients(): ?array
 {
@@ -53,29 +50,49 @@ function getClients(): ?array
         FROM
             `users`
         LEFT JOIN
-            `bugh_uslugi_stat`
+            `logs_auth_cabinet`
                 ON
-                    `bugh_uslugi_stat`.`uid` = `users`.`uid`
+                    `logs_auth_cabinet`.`login` = `users`.`user`
                         AND
-                    `bugh_uslugi_stat`.`usluga` = 3
+                    `logs_auth_cabinet`.`auth_date` > DATE_SUB(
+                        NOW(),
+                        INTERVAL :interval SECOND
+                    )
+        LEFT JOIN
+            (
+                SELECT
+                    `logs_auth_cabinet`.`login`
+                FROM
+                    `logs_auth_cabinet`
+                WHERE
+                    `logs_auth_cabinet`.`auth_type` = 'allowed'
+                        AND
+                    `logs_auth_cabinet`.`auth_date` > DATE_SUB(
+                        NOW(),
+                        INTERVAL 20 MINUTE
+                    )
+                        AND
+                    `logs_auth_cabinet`.`auth_date` < DATE_SUB(
+                        NOW(),
+                        INTERVAL :interval SECOND
+                    )
+            ) AS
+                `auth_old`
+                    ON
+                        `auth_old`.`login` = `users`.`user`
         WHERE
-            `users`.`state` = 1
+            `logs_auth_cabinet`.`auth_type` = 'allowed'
                 AND
-            `bugh_uslugi_stat`.`date_start` >= DATE_SUB(
-                NOW(),
-                INTERVAL :interval MINUTE
-            )
-                AND
-            `bugh_uslugi_stat`.`uid` IS NOT NULL
+            `auth_old`.`login` IS NULL
                 AND
             `users`.`sms_tel` IS NOT NULL
                 AND
             `users`.`sms_tel` != ''
         GROUP BY
-            `users`.`uid`");
-
+            `users`.`sms_tel`");
+    
     $sth->bindParam(':interval', $_SERVER['argv'][1]);
-
+    
     $sth->execute();
 
     $result = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -91,15 +108,14 @@ try {
 
 $pilot = new MessengerSdk\Pilot(SMS_PILOT_KEY);
 
-$singleton = (new MessengerSdk\Singleton)
+$message = sprintf("%s %s", MESSAGE, COMPLIMENT);
+
+$singleton = (new MessengerSdk\Singleton($message))
     ->setFrom(SMS_PILOT_NAME)
     ->setFormat(MessengerSdk\Format::JSON);
 
-$message = sprintf('%s %s', MESSAGE, COMPLIMENT);
-
 foreach ($clients as $v) {
-    $singleton->setSend($message)
-        ->setTo($v['sms_tel']);
+    $singleton->setTo($v['sms_tel']);
 
     try {
         $j = json_decode($pilot->request($singleton));

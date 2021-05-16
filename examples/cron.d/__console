@@ -1,6 +1,6 @@
 
-# Файл из репозитория MikBill-DaemonSystem-PHP-Kit
-# https://github.com/itpanda-llc/mikbill-daemonsystem-php-kit
+# Файл из репозитория MikBill-DaemonSystem-Kit
+# https://github.com/itpanda-llc/mikbill-daemonsystem-kit
 
 #do_api_terminal_payments
 * * * * * root cd /var/www/mikbill/admin/ && /usr/bin/php ./index.php "do_api_terminal_payments" > /dev/null 2>&1

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Файл из репозитория MikBill-DaemonSystem-PHP-Kit
- * @link https://github.com/itpanda-llc/mikbill-daemonsystem-php-kit
+ * Файл из репозитория MikBill-DaemonSystem-Kit
+ * @link https://github.com/itpanda-llc/mikbill-daemonsystem-kit
  */
 
 declare(strict_types=1);
@@ -30,7 +30,6 @@ const MESSAGE = 'Выполнен вход в панель управления.
 
 require_once 'lib/func/getConfig.php';
 require_once 'lib/func/getConnect.php';
-require_once 'lib/func/logMessage.php';
 require_once '../../../autoload.php';
 
 use Panda\SmsPilot\MessengerSdk;

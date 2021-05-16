@@ -1,7 +1,7 @@
 {
     "name": "itpanda-llc/mikbill-daemonsystem-kit",
     "description": "A set of periodic scripts for the MikBill billing system",
-    "homepage": "https://github.com/itpanda-llc/mikbill-daemonsystem-php-kit",
+    "homepage": "https://github.com/itpanda-llc/mikbill-daemonsystem-kit",
     "license": "MIT",
     "authors": [
         {
@@ -19,11 +19,11 @@
         "ext-simplexml": "*",
         "evilfreelancer/routeros-api-php": "^1.4",
         "gender-api/client": "^1.0",
-        "itpanda-llc/chelinvest-acquirer-php-sdk": "dev-master",
-        "itpanda-llc/mikbill-deviceview-php-api": "dev-main",
-        "itpanda-llc/sberbank-acquirer-php-sdk": "dev-main",
-        "itpanda-llc/smscenter-messenger-php-sdk": "dev-master",
-        "itpanda-llc/smspilot-messenger-php-sdk": "dev-master",
+        "itpanda-llc/chelinvest-acquirer-sdk": "dev-master",
+        "itpanda-llc/mikbill-deviceview-api": "dev-main",
+        "itpanda-llc/sberbank-acquirer-sdk": "dev-main",
+        "itpanda-llc/smscenter-messenger-sdk": "dev-master",
+        "itpanda-llc/smspilot-messenger-sdk": "dev-master",
         "komtet/kassa-sdk": "^8.0"
     }
 }

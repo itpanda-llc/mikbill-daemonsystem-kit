@@ -8,6 +8,27 @@
 declare(strict_types=1);
 
 /**
+ * API-ключ Gender API
+ * @link https://gender-api.com/en/api-docs
+ * @link https://github.com/markus-perl/gender-api-client
+ */
+const GENDER_API_KEY = '***';
+
+/**
+ * Код страны RUSSIA Gender API
+ * @link https://gender-api.com/en/api-docs
+ * @link https://github.com/markus-perl/gender-api-client
+ */
+const GENDER_API_RU_COUNTRY_CODE = 'RU';
+
+/**
+ * Значение пола "Женский" Gender API
+ * @link https://gender-api.com/en/api-docs
+ * @link https://github.com/markus-perl/gender-api-client
+ */
+const GENDER_API_FEMALE_GENDER_VALUE = 'female';
+
+/**
  * API-ключ SMSPILOT.RU
  * @link https://smspilot.ru/apikey.php
  */
@@ -30,16 +51,16 @@ const CONFIG = '/var/www/mikbill/admin/app/etc/config.xml';
  * @example SAMPLES[array_rand(SAMPLES, 1)];
  */
 const SAMPLES = [
-    'с Днем рождения! Хорошего вам дня!',
-    'огромного счастья вам! С Днем рождения!',
-    'сегодня прекрасный день! С Днем рождения!',
-    'сегодня замечательный праздник! С Днем рождения!',
-    'с Днем рождения, с прекрасным и светлым днем!',
-    'с Днем рождения, с прекрасным праздником!',
-    'доброго вам дня! С Днем рождения!',
-    'желаем больших успехов! С Днем рождения!',
-    'всех благ и хорошего настроения вам! С Днем рождения!',
-    'с Днем рождения! Желаем вам светлых идей!'
+    'желаем счастья и любви! С 8 марта!',
+    'пусть весны подарки восхищают вас! С 8 марта!',
+    'пусть мир вокруг становится ярче! С 8 марта!',
+    'желаем красивых слов и цветов! С 8 марта!',
+    'сегодня ваш женский и яркий день! С праздником!',
+    'пусть эта весна дарит вам счастье! С 8 марта!',
+    'сегодня прекрасный весенний день! С 8 марта!',
+    'с празником, с прекрасным весенним днем!',
+    'пусть все будет прекрасно! С праздником!',
+    'хорошего настроения вам! С 8 марта!'
 ];
 
 /** Подпись, добавляемая к сообщению */
@@ -56,13 +77,14 @@ require_once '../../../autoload.php';
 use Panda\SmsPilot\MessengerSdk;
 
 /**
- * @return array|null Параметры клиентов
+ * @return array Параметры клиентов
  */
 function getClients(): ?array
 {
     $sth = getConnect()->query("
         SELECT
             `users`.`uid`,
+            @name :=
             SUBSTRING(
                 `users`.`fio`,
                 (
@@ -73,7 +95,24 @@ function getClients(): ?array
                 )
             ) AS
                 `name`,
-                `users`.`sms_tel`
+            SUBSTRING(
+                @name,
+                1,
+                LENGTH(
+                    SUBSTRING(
+                        @name,
+                        1,
+                        (
+                            LOCATE(
+                                ' ',
+                                @name
+                            ) - 1
+                        )
+                    )
+                )
+            ) AS
+                `first_name`,
+            `users`.`sms_tel`
         FROM
             `users`
         WHERE
@@ -84,16 +123,12 @@ function getClients(): ?array
             )
                 AND
             MONTH(
-                `users`.`date_birth`
-            ) = MONTH(
-                    NOW()
-                )
+                NOW()
+            ) = 3
                 AND
             DAY(
-                `users`.`date_birth`
-            ) = DAY(
-                    NOW()
-                )
+                NOW()
+            ) = 8
                 AND
             `users`.`sms_tel` IS NOT NULL
                 AND
@@ -106,23 +141,31 @@ function getClients(): ?array
     return ($result !== []) ? $result : null;
 }
 
-/**
- * @param string $name Имя пользователя
- * @return string Текст сообщения
- */
-function getMessage(string $name): string
-{    
-    return sprintf("%s, %s %s",
-        $name,
-        SAMPLES[array_rand(SAMPLES, 1)],
-        COMPLIMENT);
-}
-
 try {
     !is_null($clients = getClients()) || exit;
 } catch (PDOException $e) {
     exit(sprintf("%s\n", $e->getMessage()));
 }
+
+$client = new GenderApi\Client(GENDER_API_KEY);
+
+foreach ($clients as $v) {
+    try {
+        $gender = $client->getByFirstNameAndCountry($v['first_name'],
+            GENDER_API_RU_COUNTRY_CODE)->getGender();
+    } catch (GenderApi\Exception $e) {
+        echo sprintf("%s\n", $e->getMessage());
+
+        continue;
+    }
+
+    if ($gender === GENDER_API_FEMALE_GENDER_VALUE)
+        $females[] = ['uid' => $v['uid'],
+            'name' => $v['name'],
+            'sms_tel' => $v['sms_tel']];
+}
+
+!is_null($females) || exit;
 
 $pilot = new MessengerSdk\Pilot(SMS_PILOT_KEY);
 
@@ -130,8 +173,11 @@ $singleton = (new MessengerSdk\Singleton)
     ->setFrom(SMS_PILOT_NAME)
     ->setFormat(MessengerSdk\Format::JSON);
 
-foreach ($clients as $v) {
-    $message = getMessage($v['name']);
+foreach ($females as $v) {
+    $message = sprintf("%s, %s %s",
+        $v['name'],
+        SAMPLES[array_rand(SAMPLES, 1)],
+        COMPLIMENT);
 
     $singleton->setSend($message)
         ->setTo($v['sms_tel']);

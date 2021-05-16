@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Файл из репозитория MikBill-DaemonSystem-PHP-Kit
- * @link https://github.com/itpanda-llc/mikbill-daemonsystem-php-kit
+ * Файл из репозитория MikBill-DaemonSystem-Kit
+ * @link https://github.com/itpanda-llc/mikbill-daemonsystem-kit
  */
 
 declare(strict_types=1);
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * URL-адрес web-запроса
  * @link https://github.com/itpanda-llc/mikbill-deviceview-php-api
  */
-const API_URL = 'https://***/backend/deviceview/';
+const API_URL = 'https://***/api/deviceview/';
 
 /**
  * Параметр "Секретный ключ"

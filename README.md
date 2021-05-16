@@ -1,4 +1,4 @@
-# MikBill-DaemonSystem-PHP-Kit
+# MikBill-DaemonSystem-Kit
 
 Набор периодических скриптов для биллинговой системы ["MikBill"](https://mikbill.pro)
 
@@ -28,11 +28,11 @@
 * [EvilFreelancer/routeros-api-php](https://github.com/EvilFreelancer/routeros-api-php)
 * [Komtet/komtet-kassa-php-sdk](https://github.com/Komtet/komtet-kassa-php-sdk)
 * [markus-perl/gender-api-client](https://github.com/markus-perl/gender-api-client)
-* [itpanda-llc/chelinvest-acquirer-php-sdk](https://github.com/itpanda-llc/chelinvest-acquirer-php-sdk)
-* [itpanda-llc/mikbill-deviceview-php-api](https://github.com/itpanda-llc/mikbill-deviceview-php-api)
-* [itpanda-llc/sberbank-acquirer-php-sdk](https://github.com/itpanda-llc/sberbank-acquirer-php-sdk)
-* [itpanda-llc/smscenter-messenger-php-sdk](https://github.com/itpanda-llc/smscenter-messenger-php-sdk)
-* [itpanda-llc/smspilot-messenger-php-sdk](https://github.com/itpanda-llc/smspilot-messenger-php-sdk)
+* [itpanda-llc/chelinvest-acquirer-sdk](https://github.com/itpanda-llc/chelinvest-acquirer-sdk)
+* [itpanda-llc/mikbill-deviceview-api](https://github.com/itpanda-llc/mikbill-deviceview-api)
+* [itpanda-llc/sberbank-acquirer-sdk](https://github.com/itpanda-llc/sberbank-acquirer-sdk)
+* [itpanda-llc/smscenter-messenger-sdk](https://github.com/itpanda-llc/smscenter-messenger-sdk)
+* [itpanda-llc/smspilot-messenger-sdk](https://github.com/itpanda-llc/smspilot-messenger-sdk)
 
 ## Установка
 

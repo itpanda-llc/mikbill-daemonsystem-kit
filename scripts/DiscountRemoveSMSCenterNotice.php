@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Файл из репозитория MikBill-DaemonSystem-PHP-Kit
- * @link https://github.com/itpanda-llc/mikbill-daemonsystem-php-kit
+ * Файл из репозитория MikBill-DaemonSystem-Kit
+ * @link https://github.com/itpanda-llc/mikbill-daemonsystem-kit
  */
 
 declare(strict_types=1);
@@ -33,6 +33,12 @@ const CONFIG = '/var/www/mikbill/admin/app/etc/config.xml';
 
 /** Подпись, добавляемая к сообщению */
 const COMPLIMENT = '***';
+
+/**
+ * Временная зона
+ * @link https://www.php.net/manual/ru/timezones.php
+ */
+const TIME_ZONE = 'Asia/Yekaterinburg';
 
 /** Текст ошибки */
 const ERROR_TEXT = 'Не отправлено';
@@ -131,6 +137,28 @@ $task = (new MessengerSdk\Send\Task)
     ->setSender(SMS_CENTER_SENDER)
     ->setSoc(MessengerSdk\Send\Soc::YES)
     ->setValid(MessengerSdk\Send\Valid::min(1));
+
+try {
+    $dateTime = new DateTime("now",
+        new DateTimeZone(TIME_ZONE));
+} catch (Exception $e) {
+    exit(sprintf("%s\n", $e->getMessage()));
+}
+
+switch (true) {
+    case (((int) $dateTime->format('H')) < 10):
+        $task->setTime($dateTime->format('dmy1000'));
+
+        break;
+    case (((int) $dateTime->format('H')) === 23):
+        try {
+            $dateTime->add(new DateInterval('P1D'));
+        } catch (Exception $e) {
+            exit(sprintf("%s\n", $e->getMessage()));
+        }
+
+        $task->setTime($dateTime->format('dmy1000'));
+}
 
 foreach ($clients as $v) {
     $message = getMessage($v['user']);

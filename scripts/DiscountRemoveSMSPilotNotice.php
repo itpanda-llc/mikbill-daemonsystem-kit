@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Файл из репозитория MikBill-DaemonSystem-PHP-Kit
- * @link https://github.com/itpanda-llc/mikbill-daemonsystem-php-kit
+ * Файл из репозитория MikBill-DaemonSystem-Kit
+ * @link https://github.com/itpanda-llc/mikbill-daemonsystem-kit
  */
 
 declare(strict_types=1);
@@ -121,6 +121,27 @@ $pilot = new MessengerSdk\Pilot(SMS_PILOT_KEY);
 $singleton = (new MessengerSdk\Singleton)
     ->setFrom(SMS_PILOT_NAME)
     ->setFormat(MessengerSdk\Format::JSON);
+
+try {
+    $dateTime = new DateTime("now");
+} catch (Exception $e) {
+    exit(sprintf("%s\n", $e->getMessage()));
+}
+
+switch (true) {
+    case (((int) $dateTime->format('H')) < 10):
+        $singleton->setSendDatetime($dateTime->format('Y-m-d 05:00:00'));
+
+        break;
+    case (((int) $dateTime->format('H')) === 23):
+        try {
+            $dateTime->add(new DateInterval('P1D'));
+        } catch (Exception $e) {
+            exit(sprintf("%s\n", $e->getMessage()));
+        }
+
+        $singleton->setSendDatetime($dateTime->format('Y-m-d 05:00:00'));
+}
 
 foreach ($clients as $v) {
     $message = getMessage($v['user']);
